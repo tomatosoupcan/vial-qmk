@@ -180,19 +180,97 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
 
     //handle joystick input
     switch (keycode) {
-        case GC_SQU:
+		case GC_SQU:
 			if (record->event.pressed) {
 				register_joystick_button(0);
 			} else {
 				unregister_joystick_button(0);
 			}
 			return false;
-        case KC_A:
+		case GC_CRO:
 			if (record->event.pressed) {
 				register_joystick_button(1);
 			} else {
 				unregister_joystick_button(1);
 			}
+			return false;
+		case GC_CIR:
+			if (record->event.pressed) {
+				register_joystick_button(2);
+			} else {
+				unregister_joystick_button(2);
+			}
+			return false;
+		case GC_TRI:
+			if (record->event.pressed) {
+				register_joystick_button(3);
+			} else {
+				unregister_joystick_button(3);
+			}
+			return false;
+		case GC_L1:
+			if (record->event.pressed) {
+				register_joystick_button(4);
+			} else {
+				unregister_joystick_button(4);
+			}
+			return false;
+		case GC_R1:
+			if (record->event.pressed) {
+				register_joystick_button(5);
+			} else {
+				unregister_joystick_button(5);
+			}
+			return false;
+		case GC_L2:
+			if (record->event.pressed) {
+				register_joystick_button(6);
+			} else {
+				unregister_joystick_button(6);
+			}
+			return false;
+		case GC_R2:
+			if (record->event.pressed) {
+				register_joystick_button(7);
+			} else {
+				unregister_joystick_button(7);
+			}
+			return false;
+		case GC_SEL:
+			if (record->event.pressed) {
+				register_joystick_button(8);
+			} else {
+				unregister_joystick_button(8);
+			}
+			return false;
+		case GC_STA:
+			if (record->event.pressed) {
+				register_joystick_button(9);
+			} else {
+				unregister_joystick_button(9);
+			}
+			return false;
+		case GC_L3:
+			if (record->event.pressed) {
+				register_joystick_button(10);
+			} else {
+				unregister_joystick_button(10);
+			}
+			return false;
+		case GC_R3:
+			if (record->event.pressed) {
+				register_joystick_button(11);
+			} else {
+				unregister_joystick_button(11);
+			}
+			return false;
+		case GC_HOM:
+			if (record->event.pressed) {
+				register_joystick_button(12);
+			} else {
+				unregister_joystick_button(12);
+			}
+			return false;
     }
 
     // Abort additional processing if userspace code did

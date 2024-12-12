@@ -40,7 +40,7 @@ enum my_keycodes {
     SV_SCROLL_HOLD,
     SV_SCROLL_TOGGLE,
     SV_OUTPUT_STATUS,
-    GC_LSU = SAFE_RANGE,
+    GC_LSU,
 	GC_LSD,
 	GC_LSL,
 	GC_LSR,
