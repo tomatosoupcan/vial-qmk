@@ -20,6 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <stdint.h>
 #include "svalboard.h"
 #include "features/achordion.h"
+#include "features/socd_cleaner.h"
 #include "keymap_support.h"
 
 // in keymap.c:
@@ -178,9 +179,14 @@ int8_t mouse_keys_pressed = 0;
 
 //keep track of the current dpad mode: 0 for lstick, 1 for dpad, 2 for rstick
 int8_t dpad_mode = 0;
+//socd cleaning
+socd_cleaner_t socd_v = {{GC_UNL, GC_UNR}, SOCD_CLEANER_LAST};
+socd_cleaner_t socd_h = {{GC_UNP, GC_UND}, SOCD_CLEANER_LAST};
 
 bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
 
+    if (!process_socd_cleaner(keycode, record, &socd_v)) { return false; }
+    if (!process_socd_cleaner(keycode, record, &socd_h)) { return false; }
 
     //handle joystick input
     switch (keycode) {
