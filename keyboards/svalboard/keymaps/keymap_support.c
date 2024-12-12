@@ -203,6 +203,13 @@ void clear_button_axis(void) {
 
 bool handle_socd(bool pressed, int axis, int direction, int button, int mode, int arrow) {
     int altb = 0;
+    if (button >= 16) {
+        altb = button - 2;
+    }
+    else {
+        altb = button + 2;
+    }
+
     if (pressed) {
         switch (mode) {
                     case 10:
@@ -212,6 +219,7 @@ bool handle_socd(bool pressed, int axis, int direction, int button, int mode, in
                         return false;
                     case 11:
                         if (!(UNP_STATE && arrow == 2)) {
+                            unregister_joystick_button(altb);
                             register_joystick_button(button);
                         }
                         return false;
@@ -236,13 +244,6 @@ bool handle_socd(bool pressed, int axis, int direction, int button, int mode, in
                         }
                         return false;
                     case 11:
-                        if (button >= 16) {
-                            altb = button - 2;
-                        }
-                        else {
-                            altb = button + 2;
-                        }
-
                         unregister_joystick_button(button);
 
                         if ((UND_STATE && arrow == 0) || (UNL_STATE && arrow == 3) || (UNR_STATE && arrow == 1)) {
