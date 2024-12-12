@@ -339,41 +339,41 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
         case GC_UNP:
             if (record->event.pressed) {
                 UNP_STATE = true;
-                handle_socd(true, 1, -1, 18, socd_mode + dpad_mode, 0)
+                handle_socd(true, 1, -1, 18, socd_mode + dpad_mode, 0);
             }
             else {
                 UNP_STATE = false;
-                handle_socd(false, 1, -1, 18, socd_mode + dpad_mode, 0)
+                handle_socd(false, 1, -1, 18, socd_mode + dpad_mode, 0);
             }
             return false;
         case GC_UND:
             if (record->event.pressed) {
                 UND_STATE = true;
-                handle_socd(true, 1, 1, 16, socd_mode + dpad_mode, 1)
+                handle_socd(true, 1, 1, 16, socd_mode + dpad_mode, 1);
             }
             else {
                 UND_STATE = false;
-                handle_socd(false, 1, 1, 16, socd_mode + dpad_mode, 1)
+                handle_socd(false, 1, 1, 16, socd_mode + dpad_mode, 1);
             }
             return false;
         case GC_UNL:
             if (record->event.pressed) {
                 UNL_STATE = true;
-                handle_socd(true, 0, -1, 15, socd_mode + dpad_mode, 2)
+                handle_socd(true, 0, -1, 15, socd_mode + dpad_mode, 2);
             }
             else {
                 UNL_STATE = false;
-                handle_socd(false, 0, -1, 15, socd_mode + dpad_mode, 2)
+                handle_socd(false, 0, -1, 15, socd_mode + dpad_mode, 2);
             }
             return false;
         case GC_UNR:
             if (record->event.pressed) {
                 UNR_STATE = true;
-                handle_socd(true, 0, 1, 17, socd_mode + dpad_mode, 3)
+                handle_socd(true, 0, 1, 17, socd_mode + dpad_mode, 3);
             }
             else {
                 UNR_STATE = false;
-                handle_socd(false, 0, 1, 17, socd_mode + dpad_mode, 3)
+                handle_socd(false, 0, 1, 17, socd_mode + dpad_mode, 3);
             }
             return false;
 
