@@ -186,7 +186,7 @@ bool UND_STATE = false;
 bool UNL_STATE = false;
 bool UNR_STATE = false;
 
-void clear_button_axis() {
+void clear_button_axis(void) {
     joystick_set_axis(0, 0);
     joystick_set_axis(1, 0);
     joystick_set_axis(2, 0);
@@ -201,7 +201,7 @@ void clear_button_axis() {
     UNR_STATE = false;
 }
 
-void handle_socd(bool pressed, int axis, int direction, int button, int mode, int arrow) {
+bool handle_socd(bool pressed, int axis, int direction, int button, int mode, int arrow) {
     if (pressed) {
         switch (mode) {
                     case 10:
@@ -231,9 +231,6 @@ void handle_socd(bool pressed, int axis, int direction, int button, int mode, in
 }
 
 bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
-
-    if (!process_socd_cleaner(keycode, record, &socd_v)) { return false; }
-    if (!process_socd_cleaner(keycode, record, &socd_h)) { return false; }
 
     //handle joystick input
     switch (keycode) {
@@ -340,7 +337,7 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
             clear_button_axis();
             return false;
         case GC_UNP:
-            if (record->event.pressed)
+            if (record->event.pressed) {
                 UNP_STATE = true;
                 handle_socd(true, 1, -1, 18, socd_mode + dpad_mode, 0)
             }
@@ -350,7 +347,7 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
             }
             return false;
         case GC_UND:
-            if (record->event.pressed)
+            if (record->event.pressed) {
                 UND_STATE = true;
                 handle_socd(true, 1, 1, 16, socd_mode + dpad_mode, 1)
             }
@@ -360,7 +357,7 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
             }
             return false;
         case GC_UNL:
-            if (record->event.pressed)
+            if (record->event.pressed) {
                 UNL_STATE = true;
                 handle_socd(true, 0, -1, 15, socd_mode + dpad_mode, 2)
             }
@@ -370,7 +367,7 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
             }
             return false;
         case GC_UNR:
-            if (record->event.pressed)
+            if (record->event.pressed) {
                 UNR_STATE = true;
                 handle_socd(true, 0, 1, 17, socd_mode + dpad_mode, 3)
             }
