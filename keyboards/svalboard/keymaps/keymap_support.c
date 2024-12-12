@@ -182,8 +182,15 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
     if (!process_record_user(keycode, record)) { return false;}
     if (!in_mod_tap && !global_saved_values.disable_achordion && !process_achordion(keycode, record)) { return false; }
 
-    if (keycode >= GC_LSU && keycode <= GC_UNR) {
-        SEND_STRING("TEST");
+    //handle joystick input
+    switch (keycode) {
+        case GC_SQU:
+			if (record->event.pressed) {
+				register_joystick_button(0);
+			} else {
+				unregister_joystick_button(0);
+			}
+			return false;
     }
 
     // We are in a mod tap, with a KC_TRANSPARENT, lets make it transparent...

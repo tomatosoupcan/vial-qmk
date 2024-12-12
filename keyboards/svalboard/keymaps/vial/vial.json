@@ -97,7 +97,7 @@
 	"name": "SV_OUTPUT_STATUS"
       },
       {
-        "shortName": "Gamepad\nSquare",
+        "shortName": "Game\nSquare",
         "title": "Square Key on Gamepad.",
         "name": "GC_SQU"
           }

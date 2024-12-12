@@ -32,3 +32,5 @@
 
 // Joystick Axes Resolution
 #define JOYSTICK_AXIS_RESOLUTION 8
+
+#define JOYSTICK_HAS_HAT
