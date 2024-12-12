@@ -185,6 +185,11 @@
         "shortName": "Game\nToggle",
         "title": "Toggles between the stick options.",
         "name": "GC_TOG"
+      },
+      {
+        "shortName": "Game\nSOCD",
+        "title": "Cyles between Up Priority Last Input SOCD, Last Input SOCD, Up Priority Neutral SOCD, and Neutral SOCD.",
+        "name": "GC_TOG"
       }
     ],
     "layouts": {

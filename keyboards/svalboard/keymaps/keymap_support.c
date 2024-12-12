@@ -179,9 +179,13 @@ int8_t mouse_keys_pressed = 0;
 
 //keep track of the current dpad mode: 0 for lstick, 1 for dpad, 2 for rstick
 int8_t dpad_mode = 0;
-//socd cleaning
-socd_cleaner_t socd_v = {{GC_UNL, GC_UNR}, SOCD_CLEANER_LAST};
-socd_cleaner_t socd_h = {{GC_UNP, GC_UND}, SOCD_CLEANER_LAST};
+//track socd mode: 10 Up Priority Last Input SOCD, 20 Last Input SOCD, 30 Up Priority Neutral SOCD, and 40 Neutral SOCD
+int8_t socd_mode = 10;
+//track state of direction inputs
+bool UNP_STATE = false;
+bool UND_STATE = false;
+bool UNL_STATE = false;
+bool UNR_STATE = false;
 
 bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
 
@@ -290,87 +294,49 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
                     dpad_mode = dpad_mode + 1;
                 }
 			}
+            clear_button_axis();
             return false;
         case GC_UNP:
-            if (record->event.pressed) {
-                switch (dpad_mode) {
-                    case 0:
-                        joystick_set_axis(1, -127);
-                        return false;
-                    case 1:
-                        register_joystick_button(18);
-                        return false;
-                    case 2:
-                        joystick_set_axis(4, -127);
-                        return false;
-                }
+            if (record->event.pressed)
+                UNP_STATE = true;
+                handle_socd(true, 1, -1, 18, socd_mode + dpad_mode, 0)
             }
             else {
-                joystick_set_axis(1, 0);
-                unregister_joystick_button(18);
-                joystick_set_axis(4, 0);
-                return false;
+                UNP_STATE = false;
+                handle_socd(false, 1, -1, 18, socd_mode + dpad_mode, 0)
             }
+            return false;
         case GC_UND:
-            if (record->event.pressed) {
-                switch (dpad_mode) {
-                    case 0:
-                        joystick_set_axis(1, 127);
-                        return false;
-                    case 1:
-                        register_joystick_button(16);
-                        return false;
-                    case 2:
-                        joystick_set_axis(4, 127);
-                        return false;
-                }
+            if (record->event.pressed)
+                UND_STATE = true;
+                handle_socd(true, 1, 1, 16, socd_mode + dpad_mode, 1)
             }
             else {
-                joystick_set_axis(1, 0);
-                unregister_joystick_button(16);
-                joystick_set_axis(4, 0);
-                return false;
+                UND_STATE = false;
+                handle_socd(false, 1, 1, 16, socd_mode + dpad_mode, 1)
             }
+            return false;
         case GC_UNL:
-            if (record->event.pressed) {
-                switch (dpad_mode) {
-                    case 0:
-                        joystick_set_axis(0, -127);
-                        return false;
-                    case 1:
-                        register_joystick_button(15);
-                        return false;
-                    case 2:
-                        joystick_set_axis(3, -127);
-                        return false;
-                }
+            if (record->event.pressed)
+                UNL_STATE = true;
+                handle_socd(true, 0, -1, 15, socd_mode + dpad_mode, 2)
             }
             else {
-                joystick_set_axis(0, 0);
-                unregister_joystick_button(15);
-                joystick_set_axis(3, 0);
-                return false;
+                UNL_STATE = false;
+                handle_socd(false, 0, -1, 15, socd_mode + dpad_mode, 2)
             }
+            return false;
         case GC_UNR:
-            if (record->event.pressed) {
-                switch (dpad_mode) {
-                    case 0:
-                        joystick_set_axis(0, 127);
-                        return false;
-                    case 1:
-                        register_joystick_button(17);
-                        return false;
-                    case 2:
-                        joystick_set_axis(3, 127);
-                        return false;
-                }
+            if (record->event.pressed)
+                UNR_STATE = true;
+                handle_socd(true, 0, 1, 17, socd_mode + dpad_mode, 3)
             }
             else {
-                joystick_set_axis(0, 0);
-                unregister_joystick_button(17);
-                joystick_set_axis(3, 0);
-                return false;
+                UNR_STATE = false;
+                handle_socd(false, 0, 1, 17, socd_mode + dpad_mode, 3)
             }
+            return false;
+
     }
 
     // Abort additional processing if userspace code did
@@ -600,3 +566,47 @@ joystick_config_t joystick_axes[JOYSTICK_AXIS_COUNT] = {
 	JOYSTICK_AXIS_VIRTUAL,
 	JOYSTICK_AXIS_VIRTUAL,
 };
+
+void handle_socd(bool pressed, int axis, int direction, int button, int mode, int arrow) {
+    if (pressed) {
+        switch (mode) {
+                    case 10:
+                        joystick_set_axis(axis, direction * 127);
+                        return false;
+                    case 11:
+                        register_joystick_button(button);
+                        return false;
+                    case 12:
+                        joystick_set_axis(axis + 3, direction * 127);
+                        return false;
+                }
+    }
+    else {
+        switch (mode) {
+                    case 10:
+                        joystick_set_axis(axis, 0);
+                        return false;
+                    case 11:
+                        unregister_joystick_button(button);
+                        return false;
+                    case 12:
+                        joystick_set_axis(axis + 3, 0);
+                        return false;
+                }
+    }
+}
+
+void clear_button_axis() {
+    joystick_set_axis(0, 0);
+    joystick_set_axis(1, 0);
+    joystick_set_axis(2, 0);
+    joystick_set_axis(3, 0);
+    unregister_joystick_button(15);
+    unregister_joystick_button(16);
+    unregister_joystick_button(17);
+    unregister_joystick_button(18);
+    bool UNP_STATE = false;
+    bool UND_STATE = false;
+    bool UNL_STATE = false;
+    bool UNR_STATE = false;
+}

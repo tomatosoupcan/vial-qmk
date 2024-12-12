@@ -58,6 +58,7 @@ enum my_keycodes {
 	GC_UNL,
 	GC_UNR,
 	GC_TOG,
+    GC_SCD,
     // New keycodes should go here, to avoid breaking existing keymaps - order must match vial.json
     KC_NORMAL_HOLD = SAFE_RANGE,
     KC_FUNC_HOLD,
