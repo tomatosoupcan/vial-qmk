@@ -285,28 +285,20 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
                 }
 			}
         case GC_UNP:
-            switch (dpad_mode) {
-                case 0:
-                    if (record->event.pressed) {
+            if (record->event.pressed) {
+                switch (dpad_mode) {
+                    case 0:
                         joystick_set_axis(1, -127);
-                    }
-                    else {
-                        joystick_set_axis(1, 0);
-                    }
-                case 1:
-                    if (record->event.pressed) {
+                    case 1:
                         register_joystick_button(18);
-                    }
-                    else {
-                        unregister_joystick_button(18);
-                    }
-                case 2:
-                    if (record->event.pressed) {
+                    case 2:
                         joystick_set_axis(4, -127);
-                    else {
-                        joystick_set_axis(4, 0);
-                    }
-
+                }
+            }
+            else {
+                joystick_set_axis(1, 0);
+                unregister_joystick_button(18);
+                joystick_set_axis(4, 0);
             }
     }
 
