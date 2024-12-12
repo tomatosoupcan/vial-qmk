@@ -96,6 +96,12 @@
 	"title": "Output the current internal state of the keyboard.",
 	"name": "SV_OUTPUT_STATUS"
       }
+      ,
+      {
+	"shortName": "Select\nWord",
+	"title": "Select an entire focused word at once.",
+	"name": "SV_SELECT_WORD"
+      }
     ],
     "layouts": {
       "keymap": [

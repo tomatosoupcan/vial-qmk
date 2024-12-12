@@ -20,6 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <stdint.h>
 #include "svalboard.h"
 #include "features/achordion.h"
+#include "features/select_word.h"
 #include "keymap_support.h"
 
 // in keymap.c:
@@ -180,7 +181,7 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
 
     // Abort additional processing if userspace code did
     if (!process_record_user(keycode, record)) { return false;}
-    if (!in_mod_tap && !global_saved_values.disable_achordion && !process_achordion(keycode, record)) { return false; }
+    if (!in_mod_tap && !global_saved_values.disable_achordion && !process_achordion(keycode, record) && !process_select_word(keycode, record, SV_SELECT_WORD)) { return false; }
 
     // We are in a mod tap, with a KC_TRANSPARENT, lets make it transparent...
     if (IS_QK_MOD_TAP(keycode) && ((keycode & 0xFF) == KC_TRANSPARENT) &&
@@ -317,6 +318,9 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
             case SV_OUTPUT_STATUS:
                 output_keyboard_info();
                 return false;
+            case SV_SELECT_WORD:
+                process_select_word();
+                return false;
         }
     } else { // key released
         switch (keycode) {
@@ -387,6 +391,8 @@ void mouse_mode(bool on) {
         layer_on(MH_AUTO_BUTTONS_LAYER);
         mh_auto_buttons_timer = timer_read();
         mouse_mode_enabled = true;
+        //disable selectword
+        select_word_end();
     } else {
         layer_off(MH_AUTO_BUTTONS_LAYER);
         mh_auto_buttons_timer = 0;
