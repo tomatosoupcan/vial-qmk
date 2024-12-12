@@ -20,7 +20,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <stdint.h>
 #include "svalboard.h"
 #include "features/achordion.h"
-#include "features/socd_cleaner.h"
 #include "keymap_support.h"
 
 // in keymap.c:
