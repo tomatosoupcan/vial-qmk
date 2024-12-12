@@ -389,21 +389,21 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
         case GC_UND:
             if (record->event.pressed) {
                 UND_STATE = true;
-                handle_socd(true, 1, 1, 16, socd_mode + dpad_mode, 1);
+                handle_socd(true, 1, 1, 16, socd_mode + dpad_mode, 2);
             }
             else {
                 UND_STATE = false;
-                handle_socd(false, 1, 1, 16, socd_mode + dpad_mode, 1);
+                handle_socd(false, 1, 1, 16, socd_mode + dpad_mode, 2);
             }
             return false;
         case GC_UNL:
             if (record->event.pressed) {
                 UNL_STATE = true;
-                handle_socd(true, 0, -1, 15, socd_mode + dpad_mode, 2);
+                handle_socd(true, 0, -1, 15, socd_mode + dpad_mode, 1);
             }
             else {
                 UNL_STATE = false;
-                handle_socd(false, 0, -1, 15, socd_mode + dpad_mode, 2);
+                handle_socd(false, 0, -1, 15, socd_mode + dpad_mode, 1);
             }
             return false;
         case GC_UNR:
