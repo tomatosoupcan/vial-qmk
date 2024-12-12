@@ -318,9 +318,6 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
             case SV_OUTPUT_STATUS:
                 output_keyboard_info();
                 return false;
-            case SV_SELECT_WORD:
-                process_select_word();
-                return false;
         }
     } else { // key released
         switch (keycode) {
