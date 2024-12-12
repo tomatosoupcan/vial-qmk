@@ -284,21 +284,86 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
                     dpad_mode = dpad_mode + 1;
                 }
 			}
+            return false;
         case GC_UNP:
             if (record->event.pressed) {
                 switch (dpad_mode) {
                     case 0:
                         joystick_set_axis(1, -127);
+                        return false;
                     case 1:
                         register_joystick_button(18);
+                        return false;
                     case 2:
                         joystick_set_axis(4, -127);
+                        return false;
                 }
             }
             else {
                 joystick_set_axis(1, 0);
                 unregister_joystick_button(18);
                 joystick_set_axis(4, 0);
+                return false;
+            }
+        case GC_UND:
+            if (record->event.pressed) {
+                switch (dpad_mode) {
+                    case 0:
+                        joystick_set_axis(1, 127);
+                        return false;
+                    case 1:
+                        register_joystick_button(16);
+                        return false;
+                    case 2:
+                        joystick_set_axis(4, 127);
+                        return false;
+                }
+            }
+            else {
+                joystick_set_axis(1, 0);
+                unregister_joystick_button(16);
+                joystick_set_axis(4, 0);
+                return false;
+            }
+        case GC_UNL:
+            if (record->event.pressed) {
+                switch (dpad_mode) {
+                    case 0:
+                        joystick_set_axis(0, -127);
+                        return false;
+                    case 1:
+                        register_joystick_button(15);
+                        return false;
+                    case 2:
+                        joystick_set_axis(3, -127);
+                        return false;
+                }
+            }
+            else {
+                joystick_set_axis(0, 0);
+                unregister_joystick_button(15);
+                joystick_set_axis(3, 0);
+                return false;
+            }
+        case GC_UNR:
+            if (record->event.pressed) {
+                switch (dpad_mode) {
+                    case 0:
+                        joystick_set_axis(0, 127);
+                        return false;
+                    case 1:
+                        register_joystick_button(17);
+                        return false;
+                    case 2:
+                        joystick_set_axis(3, 127);
+                        return false;
+                }
+            }
+            else {
+                joystick_set_axis(0, 0);
+                unregister_joystick_button(17);
+                joystick_set_axis(3, 0);
+                return false;
             }
     }
 
