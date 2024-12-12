@@ -180,8 +180,9 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
 
 
     // Abort additional processing if userspace code did
+    if (!process_select_word(keycode, record, SV_SELECT_WORD)) { return false; }
     if (!process_record_user(keycode, record)) { return false;}
-    if (!in_mod_tap && !global_saved_values.disable_achordion && !process_achordion(keycode, record) && !process_select_word(keycode, record, SV_SELECT_WORD)) { return false; }
+    if (!in_mod_tap && !global_saved_values.disable_achordion && !process_achordion(keycode, record)) { return false; }
 
     // We are in a mod tap, with a KC_TRANSPARENT, lets make it transparent...
     if (IS_QK_MOD_TAP(keycode) && ((keycode & 0xFF) == KC_TRANSPARENT) &&
