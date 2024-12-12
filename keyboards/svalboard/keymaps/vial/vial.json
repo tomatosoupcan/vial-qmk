@@ -95,7 +95,12 @@
 	"shortName": "Output\nStatus",
 	"title": "Output the current internal state of the keyboard.",
 	"name": "SV_OUTPUT_STATUS"
-      }
+      },
+    {
+      "shortName": "Gamepad\nSquare",
+      "title": "Square button on the gamepad.",
+      "name": "GC_SQU"
+        }
     ],
     "layouts": {
       "keymap": [

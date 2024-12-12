@@ -50,6 +50,20 @@ static int _ds_l_y = 0;
 static int _ds_r_x = 0;
 static int _ds_r_y = 0;
 
+//define joystick information
+#define JOYSTICK_BUTTON_COUNT 32
+#define JOYSTICK_AXIS_COUNT 6
+#define JOYSTICK_AXIS_RESOLUTION 8
+joystick_config_t joystick_axes[JOYSTICK_AXIS_COUNT] = {
+    JOYSTICK_AXIS_VIRTUAL, // x
+    JOYSTICK_AXIS_VIRTUAL, // y
+    JOYSTICK_AXIS_VIRTUAL, // z
+    JOYSTICK_AXIS_VIRTUAL, // rx
+    JOYSTICK_AXIS_VIRTUAL, // ry
+    JOYSTICK_AXIS_VIRTUAL // rz
+};
+//end joystick info
+
 static bool scroll_hold = false, scroll_toggle = false;
 
 report_mouse_t pointing_device_task_combined_user(report_mouse_t reportMouse1, report_mouse_t reportMouse2) {
@@ -176,7 +190,9 @@ bool in_mod_tap = false;
 int8_t in_mod_tap_layer = -1;
 int8_t mouse_keys_pressed = 0;
 bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
-
+    if (keycode >= GC_LSU && keycode <= GC_UNR) {
+        SEND_STRING("TESTING");
+    }
 
     // Abort additional processing if userspace code did
     if (!process_record_user(keycode, record)) { return false;}
