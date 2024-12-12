@@ -54,6 +54,9 @@ bool process_select_word(uint16_t keycode, keyrecord_t* record,
  * `matrix_scan_user()` function in keymap.c. (If no timeout is set, calling
  * `select_word_task()` has no effect.)
  */
+
+void select_word_task(void);
+
 #if SELECT_WORD_TIMEOUT > 0
 void select_word_task(void);
 #else
