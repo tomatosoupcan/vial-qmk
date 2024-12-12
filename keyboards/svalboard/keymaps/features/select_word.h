@@ -55,7 +55,7 @@ bool process_select_word(uint16_t keycode, keyrecord_t* record,
  * `select_word_task()` has no effect.)
  */
 
-void select_word_task(void);
+void select_word_end(void);
 
 #if SELECT_WORD_TIMEOUT > 0
 void select_word_task(void);
