@@ -604,8 +604,8 @@ void clear_button_axis() {
     unregister_joystick_button(16);
     unregister_joystick_button(17);
     unregister_joystick_button(18);
-    bool UNP_STATE = false;
-    bool UND_STATE = false;
-    bool UNL_STATE = false;
-    bool UNR_STATE = false;
+    UNP_STATE = false;
+    UND_STATE = false;
+    UNL_STATE = false;
+    UNR_STATE = false;
 }
