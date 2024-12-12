@@ -205,17 +205,17 @@ bool handle_socd(bool pressed, int axis, int direction, int button, int mode, in
     if (pressed) {
         switch (mode) {
                     case 10:
-                        if !(UNP_STATE && arrow == 2) {
+                        if (!(UNP_STATE && arrow == 2)) {
                             joystick_set_axis(axis, direction * 127);
                         }
                         return false;
                     case 11:
-                        if !(UNP_STATE && arrow == 2) {
+                        if (!(UNP_STATE && arrow == 2)) {
                             register_joystick_button(button);
                         }
                         return false;
                     case 12:
-                        if !(UNP_STATE && arrow == 2) {
+                        if (!(UNP_STATE && arrow == 2)) {
                             joystick_set_axis(axis + 3, direction * 127);
                         }
                         return false;
@@ -225,30 +225,30 @@ bool handle_socd(bool pressed, int axis, int direction, int button, int mode, in
         switch (mode) {
                     case 10:
                         if ((UND_STATE && arrow == 0) || (UNL_STATE && arrow == 3) || (UNR_STATE && arrow == 1)) {
-                            joystick_set_axis(axis, direction * 127 * -1)
+                            joystick_set_axis(axis, direction * 127 * -1);
                         }
                         else {
                             joystick_set_axis(axis, 0);
                         }
                         return false;
                     case 11:
-                        int alt = 0;
+                        int8_t altb = 0;
                         if (button >= 16) {
-                            alt = button - 2;
+                            altb = button - 2;
                         }
                         else {
-                            alt = button + 2;
+                            altb = button + 2;
                         }
 
                         unregister_joystick_button(button);
 
                         if ((UND_STATE && arrow == 0) || (UNL_STATE && arrow == 3) || (UNR_STATE && arrow == 1)) {
-                            register_joystick_button(alt);
+                            register_joystick_button(altb);
                         }
                         return false;
                     case 12:
                         if ((UND_STATE && arrow == 0) || (UNL_STATE && arrow == 3) || (UNR_STATE && arrow == 1)) {
-                            joystick_set_axis(axis + 3, direction * 127 * -1)
+                            joystick_set_axis(axis + 3, direction * 127 * -1);
                         }
                         else {
                             joystick_set_axis(axis + 3, 0);
