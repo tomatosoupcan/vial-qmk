@@ -95,6 +95,96 @@
 	"shortName": "Output\nStatus",
 	"title": "Output the current internal state of the keyboard.",
 	"name": "SV_OUTPUT_STATUS"
+      },
+      {
+        "shortName": "Game\nSquare",
+        "title": "Square Key on Gamepad.",
+        "name": "GC_SQU"
+      },
+      {
+        "shortName": "Game\nCross",
+        "title": "Cross Key on Gamepad.",
+        "name": "GC_CRO"
+      },
+      {
+        "shortName": "Game\nCircle",
+        "title": "Circle Key on Gamepad.",
+        "name": "GC_CIR"
+      },
+      {
+        "shortName": "Game\nTriangle",
+        "title": "Triangle Key on Gamepad.",
+        "name": "GC_TRI"
+      },
+      {
+        "shortName": "Game\nL1",
+        "title": "L1 Key on Gamepad.",
+        "name": "GC_L1"
+      },
+      {
+        "shortName": "Game\nR1",
+        "title": "R1 Key on Gamepad.",
+        "name": "GC_R1"
+      },
+      {
+        "shortName": "Game\nL2",
+        "title": "L2 Key on Gamepad.",
+        "name": "GC_L2"
+      },
+      {
+        "shortName": "Game\nR2",
+        "title": "R2 Key on Gamepad.",
+        "name": "GC_R2"
+      },
+      {
+        "shortName": "Game\nL3",
+        "title": "L3 Key on Gamepad.",
+        "name": "GC_L3"
+      },
+      {
+        "shortName": "Game\nR3",
+        "title": "R3 Key on Gamepad.",
+        "name": "GC_R3"
+      },
+      {
+        "shortName": "Game\nSelect",
+        "title": "Select Key on Gamepad.",
+        "name": "GC_SEL"
+      },
+      {
+        "shortName": "Game\nStart",
+        "title": "Start Key on Gamepad.",
+        "name": "GC_STA"
+      },
+      {
+        "shortName": "Game\nHome",
+        "title": "Home Key on Gamepad.",
+        "name": "GC_HOM"
+      },
+      {
+        "shortName": "Game\nUp",
+        "title": "Up Key on Gamepad.",
+        "name": "GC_UNP"
+      },
+      {
+        "shortName": "Game\nDown",
+        "title": "Down Key on Gamepad.",
+        "name": "GC_UND"
+      },
+      {
+        "shortName": "Game\nLeft",
+        "title": "Left Key on Gamepad.",
+        "name": "GC_UNL"
+      },
+      {
+        "shortName": "Game\nRight",
+        "title": "Right Key on Gamepad.",
+        "name": "GC_UNR"
+      },
+      {
+        "shortName": "Game\nToggle",
+        "title": "Toggles between the stick options.",
+        "name": "GC_TOG"
       }
     ],
     "layouts": {
