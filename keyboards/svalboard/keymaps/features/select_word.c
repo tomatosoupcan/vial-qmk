@@ -46,11 +46,13 @@ void select_word_task(void) {
   }
 }
 
+//add an option to manually end the state, useful to disable on mouse move automatically
+
+#endif  // SELECT_WORD_TIMEOUT > 0
+
 void select_word_end(void) {
   state = STATE_NONE;
 }
-
-#endif  // SELECT_WORD_TIMEOUT > 0
 
 bool process_select_word(uint16_t keycode, keyrecord_t* record,
                          uint16_t sel_keycode) {
