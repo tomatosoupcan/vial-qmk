@@ -175,6 +175,10 @@ void check_layer_67(void) {
 bool in_mod_tap = false;
 int8_t in_mod_tap_layer = -1;
 int8_t mouse_keys_pressed = 0;
+
+//keep track of the current dpad mode: 0 for lstick, 1 for dpad, 2 for rstick
+int8_t dpad_mode = 0;
+
 bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
 
 
@@ -271,6 +275,39 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
 				unregister_joystick_button(12);
 			}
 			return false;
+        case GC_TOG:
+            if (record->event.pressed) {
+				if (dpad_mode == 2) {
+                    dpad_mode = 0;
+                }
+                else {
+                    dpad_mode = dpad_mode + 1;
+                }
+			}
+        case GC_UNP:
+            switch (dpad_mode) {
+                case 0:
+                    if (record->event.pressed) {
+                        joystick_set_axis(1, -127);
+                    }
+                    else {
+                        joystick_set_axis(1, 0);
+                    }
+                case 1:
+                    if (record->event.pressed) {
+                        register_joystick_button(18);
+                    }
+                    else {
+                        unregister_joystick_button(18);
+                    }
+                case 2:
+                    if (record->event.pressed) {
+                        joystick_set_axis(4, -127);
+                    else {
+                        joystick_set_axis(4, 0);
+                    }
+
+            }
     }
 
     // Abort additional processing if userspace code did

@@ -62,18 +62,6 @@ enum my_keycodes {
     KC_NORMAL_HOLD = SAFE_RANGE,
     KC_FUNC_HOLD,
     SV_SAFE_RANGE, // Keycodes over this are safe on Svalboard.
-    GC_LSU,
-	GC_LSD,
-	GC_LSL,
-	GC_LSR,
-	GC_RSU,
-	GC_RSD,
-	GC_RSL,
-    GC_RSR,
-    GC_DPU,
-    GC_DPD,
-    GC_DPL,
-    GC_DPR,
 };
 
 #define MH_AUTO_BUTTONS_LAYER (DYNAMIC_KEYMAP_LAYER_COUNT - 1)
