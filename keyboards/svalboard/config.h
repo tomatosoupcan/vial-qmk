@@ -97,7 +97,3 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define PERMISSIVE_HOLD
 #define ACHORDION_STREAK
-
-#define JOYSTICK_BUTTON_COUNT 32
-#define JOYSTICK_AXIS_COUNT 6
-#define JOYSTICK_AXIS_RESOLUTION 8

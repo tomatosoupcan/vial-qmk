@@ -28,6 +28,7 @@
  * \{
  */
 
+/*
 #ifndef JOYSTICK_BUTTON_COUNT
 #    define JOYSTICK_BUTTON_COUNT 8
 #elif JOYSTICK_BUTTON_COUNT > 32
@@ -49,6 +50,7 @@
 #elif JOYSTICK_AXIS_RESOLUTION < 8 || JOYSTICK_AXIS_RESOLUTION > 16
 #    error JOYSTICK_AXIS_RESOLUTION must be between 8 and 16
 #endif
+*/
 
 #define JOYSTICK_MAX_VALUE ((1L << (JOYSTICK_AXIS_RESOLUTION - 1)) - 1)
 
@@ -68,7 +70,7 @@ typedef struct {
     uint16_t max_digit;
 } joystick_config_t;
 
-extern joystick_config_t joystick_axes[JOYSTICK_AXIS_COUNT];
+//extern joystick_config_t joystick_axes[JOYSTICK_AXIS_COUNT];
 
 typedef struct {
     uint8_t buttons[(JOYSTICK_BUTTON_COUNT - 1) / 8 + 1];
