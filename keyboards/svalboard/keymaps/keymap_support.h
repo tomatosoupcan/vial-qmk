@@ -40,6 +40,10 @@ enum my_keycodes {
     SV_SCROLL_HOLD,
     SV_SCROLL_TOGGLE,
     SV_OUTPUT_STATUS,
+    // New keycodes should go here, to avoid breaking existing keymaps - order must match vial.json
+    KC_NORMAL_HOLD = SAFE_RANGE,
+    KC_FUNC_HOLD,
+    SV_SAFE_RANGE, // Keycodes over this are safe on Svalboard.
     GC_LSU,
 	GC_LSD,
 	GC_LSL,
@@ -70,10 +74,6 @@ enum my_keycodes {
     GC_UND,
     GC_UNL,
     GC_UNR,
-    // New keycodes should go here, to avoid breaking existing keymaps - order must match vial.json
-    KC_NORMAL_HOLD = SAFE_RANGE,
-    KC_FUNC_HOLD,
-    SV_SAFE_RANGE, // Keycodes over this are safe on Svalboard.
 };
 
 #define MH_AUTO_BUTTONS_LAYER (DYNAMIC_KEYMAP_LAYER_COUNT - 1)
