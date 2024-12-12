@@ -228,6 +228,9 @@ bool handle_socd(bool pressed, int axis, int direction, int button, int mode, in
                         if ((UND_STATE && arrow == 0) || (UNL_STATE && arrow == 3) || (UNR_STATE && arrow == 1)) {
                             joystick_set_axis(axis, direction * 127 * -1);
                         }
+                        else if (UNP_STATE && arrow == 2) {
+                            return false;
+                        }
                         else {
                             joystick_set_axis(axis, 0);
                         }
@@ -249,6 +252,9 @@ bool handle_socd(bool pressed, int axis, int direction, int button, int mode, in
                     case 12:
                         if ((UND_STATE && arrow == 0) || (UNL_STATE && arrow == 3) || (UNR_STATE && arrow == 1)) {
                             joystick_set_axis(axis + 3, direction * 127 * -1);
+                        }
+                        else if (UNP_STATE && arrow == 2) {
+                            return false;
                         }
                         else {
                             joystick_set_axis(axis + 3, 0);
