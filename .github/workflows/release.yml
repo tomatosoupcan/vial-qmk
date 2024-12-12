@@ -2,8 +2,6 @@ name: Release QMK Firmware
 
 on:
   push
-  pull_request_target:
-    types: [opened, synchronize, reopened]
 
 
 permissions: write-all
