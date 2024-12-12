@@ -178,10 +178,6 @@ int8_t mouse_keys_pressed = 0;
 bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
 
 
-    // Abort additional processing if userspace code did
-    if (!process_record_user(keycode, record)) { return false;}
-    if (!in_mod_tap && !global_saved_values.disable_achordion && !process_achordion(keycode, record)) { return false; }
-
     //handle joystick input
     switch (keycode) {
         case GC_SQU:
@@ -191,7 +187,18 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
 				unregister_joystick_button(0);
 			}
 			return false;
+        case KC_A:
+			if (record->event.pressed) {
+				register_joystick_button(1);
+			} else {
+				unregister_joystick_button(1);
+			}
     }
+
+    // Abort additional processing if userspace code did
+    if (!process_record_user(keycode, record)) { return false;}
+    if (!in_mod_tap && !global_saved_values.disable_achordion && !process_achordion(keycode, record)) { return false; }
+
 
     // We are in a mod tap, with a KC_TRANSPARENT, lets make it transparent...
     if (IS_QK_MOD_TAP(keycode) && ((keycode & 0xFF) == KC_TRANSPARENT) &&
