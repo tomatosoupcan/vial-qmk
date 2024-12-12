@@ -182,6 +182,10 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
     if (!process_record_user(keycode, record)) { return false;}
     if (!in_mod_tap && !global_saved_values.disable_achordion && !process_achordion(keycode, record)) { return false; }
 
+    if (keycode >= GC_LSU && keycode <= GC_UNR) {
+        SEND_STRING("TEST");
+    }
+
     // We are in a mod tap, with a KC_TRANSPARENT, lets make it transparent...
     if (IS_QK_MOD_TAP(keycode) && ((keycode & 0xFF) == KC_TRANSPARENT) &&
         record->tap.count > 0 && !in_mod_tap &&
