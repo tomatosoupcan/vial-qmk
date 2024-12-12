@@ -51,9 +51,7 @@ static int _ds_r_x = 0;
 static int _ds_r_y = 0;
 
 //define joystick information
-#define JOYSTICK_BUTTON_COUNT 32
-#define JOYSTICK_AXIS_COUNT 6
-#define JOYSTICK_AXIS_RESOLUTION 8
+
 joystick_config_t joystick_axes[JOYSTICK_AXIS_COUNT] = {
 	JOYSTICK_AXIS_VIRTUAL,
 	JOYSTICK_AXIS_VIRTUAL,
