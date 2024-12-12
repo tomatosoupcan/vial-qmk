@@ -8,3 +8,4 @@ STENO_PROTOCOL = geminipr
 SRC += ../features/achordion.c
 
 JOYSTICK_ENABLE = yes
+JOYSTICK_DRIVER = digital
