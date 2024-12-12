@@ -186,6 +186,50 @@ bool UND_STATE = false;
 bool UNL_STATE = false;
 bool UNR_STATE = false;
 
+void clear_button_axis() {
+    joystick_set_axis(0, 0);
+    joystick_set_axis(1, 0);
+    joystick_set_axis(2, 0);
+    joystick_set_axis(3, 0);
+    unregister_joystick_button(15);
+    unregister_joystick_button(16);
+    unregister_joystick_button(17);
+    unregister_joystick_button(18);
+    UNP_STATE = false;
+    UND_STATE = false;
+    UNL_STATE = false;
+    UNR_STATE = false;
+}
+
+void handle_socd(bool pressed, int axis, int direction, int button, int mode, int arrow) {
+    if (pressed) {
+        switch (mode) {
+                    case 10:
+                        joystick_set_axis(axis, direction * 127);
+                        return false;
+                    case 11:
+                        register_joystick_button(button);
+                        return false;
+                    case 12:
+                        joystick_set_axis(axis + 3, direction * 127);
+                        return false;
+                }
+    }
+    else {
+        switch (mode) {
+                    case 10:
+                        joystick_set_axis(axis, 0);
+                        return false;
+                    case 11:
+                        unregister_joystick_button(button);
+                        return false;
+                    case 12:
+                        joystick_set_axis(axis + 3, 0);
+                        return false;
+                }
+    }
+}
+
 bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
 
     if (!process_socd_cleaner(keycode, record, &socd_v)) { return false; }
@@ -565,47 +609,3 @@ joystick_config_t joystick_axes[JOYSTICK_AXIS_COUNT] = {
 	JOYSTICK_AXIS_VIRTUAL,
 	JOYSTICK_AXIS_VIRTUAL,
 };
-
-void handle_socd(bool pressed, int axis, int direction, int button, int mode, int arrow) {
-    if (pressed) {
-        switch (mode) {
-                    case 10:
-                        joystick_set_axis(axis, direction * 127);
-                        return false;
-                    case 11:
-                        register_joystick_button(button);
-                        return false;
-                    case 12:
-                        joystick_set_axis(axis + 3, direction * 127);
-                        return false;
-                }
-    }
-    else {
-        switch (mode) {
-                    case 10:
-                        joystick_set_axis(axis, 0);
-                        return false;
-                    case 11:
-                        unregister_joystick_button(button);
-                        return false;
-                    case 12:
-                        joystick_set_axis(axis + 3, 0);
-                        return false;
-                }
-    }
-}
-
-void clear_button_axis() {
-    joystick_set_axis(0, 0);
-    joystick_set_axis(1, 0);
-    joystick_set_axis(2, 0);
-    joystick_set_axis(3, 0);
-    unregister_joystick_button(15);
-    unregister_joystick_button(16);
-    unregister_joystick_button(17);
-    unregister_joystick_button(18);
-    UNP_STATE = false;
-    UND_STATE = false;
-    UNL_STATE = false;
-    UNR_STATE = false;
-}
