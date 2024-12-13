@@ -258,7 +258,7 @@ bool handle_socd(bool pressed, int axis, int direction, int button, int mode, in
                         return false;
                     case 32:
                         if ((UNL_STATE && arrow == 3) || (UNR_STATE && arrow == 1)) {
-                            joystick_set_axis(axis, 0);
+                            joystick_set_axis(axis + 3, 0);
                         }
                         else if (!(UNP_STATE && arrow == 2) || (UND_STATE && arrow == 0)) {
                             joystick_set_axis(axis + 3, direction * 127);
@@ -268,16 +268,25 @@ bool handle_socd(bool pressed, int axis, int direction, int button, int mode, in
                         if ((UNL_STATE && arrow == 3) || (UNR_STATE && arrow == 1) || (UNP_STATE && arrow == 2) || (UND_STATE && arrow == 0)) {
                             joystick_set_axis(axis, 0);
                         }
+                        else {
+                            joystick_set_axis(axis, direction * 127);
+                        }
                         return false;
                     case 41:
                         if ((UNL_STATE && arrow == 3) || (UNR_STATE && arrow == 1) || (UNP_STATE && arrow == 2) || (UND_STATE && arrow == 0)) {
                             unregister_joystick_button(altb);
                             unregister_joystick_button(button);
                         }
+                        else {
+                            register_joystick_button(button);
+                        }
                         return false;
                     case 42:
                         if ((UNL_STATE && arrow == 3) || (UNR_STATE && arrow == 1) || (UNP_STATE && arrow == 2) || (UND_STATE && arrow == 0)) {
-                            joystick_set_axis(axis, 0);
+                            joystick_set_axis(axis + 3, 0);
+                        }
+                        else {
+                            joystick_set_axis(axis + 3, direction * 127);
                         }
                         return false;
                 }
