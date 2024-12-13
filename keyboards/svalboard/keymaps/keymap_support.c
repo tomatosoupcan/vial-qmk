@@ -203,7 +203,7 @@ void clear_button_axis(void) {
 
 bool handle_socd(bool pressed, int axis, int direction, int button, int mode, int arrow) {
     int altb = 0;
-    if (button >= 16) {
+    if (button >= 17) {
         altb = button - 2;
     }
     else {
