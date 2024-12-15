@@ -22,4 +22,4 @@ jobs:
       matrix:
         keyboard: [ svalboard/trackball/pmw3389 ]
         keymap: [ vial ]
-        side: [ left right ]
+        side: [ left, right ]
