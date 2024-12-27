@@ -21,6 +21,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 extern const int16_t mh_timer_choices[4];
 extern bool fresh_install;
 
+struct layer_hsv {
+    uint8_t hue;
+    uint8_t sat;
+    uint8_t val;
+};
+
 struct saved_values {
     uint8_t version;  // Currently at 1,  We assume all new data will be zeroed.
     bool left_scroll :1;
@@ -30,7 +36,25 @@ struct saved_values {
     uint8_t left_dpi_index;
     uint8_t right_dpi_index;
     uint8_t mh_timer_index;
+    struct layer_hsv layer_colors[DYNAMIC_KEYMAP_LAYER_COUNT];
 };
+
+#define SVAL_PROTO_VERSION 3
+
+#define SVAL_VIA_PREFIX 0xEE
+
+enum sval_command_ids {
+    sval_id_get_protocol_version                 = 0x01,
+    sval_id_get_firmware_version                 = 0x02,
+    // Layer HSVs
+    sval_id_get_layer_hsv                        = 0x10,
+    sval_id_set_layer_hsv                        = 0x11,
+};
+
+// Just for ping pong, do we want anything else for it?
+typedef struct _presence_rpc_t {
+  int presence;
+} presence_rpc_t;
 
 typedef struct saved_values saved_values_t;
 
@@ -44,3 +68,5 @@ void set_left_dpi(uint8_t index);
 void set_right_dpi(uint8_t index);
 void write_eeprom_kb(void);
 void recalibrate_pointer(void);
+void sval_set_active_layer(uint32_t layer, bool save);
+void sval_on_reconnect(void);
