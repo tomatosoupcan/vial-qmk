@@ -32,3 +32,5 @@
 
 // Joystick Axes Resolution
 #define JOYSTICK_AXIS_RESOLUTION 8
+
+#undef POINTING_DEVICE_AUTO_MOUSE_ENABLE
