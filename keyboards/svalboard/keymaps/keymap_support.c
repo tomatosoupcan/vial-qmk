@@ -30,6 +30,8 @@ void pointing_device_init_user(void) {
 }
 #endif
 
+set_auto_mouse_enable(false);
+
 #if (defined MH_AUTO_BUTTONS && defined PS2_MOUSE_ENABLE && defined MOUSEKEY_ENABLE) || defined(POINTING_DEVICE_AUTO_MOUSE_MH_ENABLE)
 
 static uint16_t mh_auto_buttons_timer;
