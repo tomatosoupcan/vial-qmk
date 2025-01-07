@@ -394,3 +394,13 @@ void mouse_mode(bool on) {
         mouse_keys_pressed = 0;
     }
 }
+
+// Joystick Config
+joystick_config_t joystick_axes[JOYSTICK_AXIS_COUNT] = {
+	JOYSTICK_AXIS_VIRTUAL,
+	JOYSTICK_AXIS_VIRTUAL,
+	JOYSTICK_AXIS_VIRTUAL,
+	JOYSTICK_AXIS_VIRTUAL,
+	JOYSTICK_AXIS_VIRTUAL,
+	JOYSTICK_AXIS_VIRTUAL,
+};

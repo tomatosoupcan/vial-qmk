@@ -49,6 +49,12 @@ void read_eeprom_kb(void) {
         global_saved_values.layer_colors[15] = HSV(0xD5FFFF); // Magenta
         modified = true;
     }
+    if (global_saved_values.version < 4) {
+        global_saved_values.version = 4;
+        global_saved_values.dir_mode = 0;
+        global_saved_values.socd_mode = 10;
+        modified = true;
+    }
     // As we add versions, just append here.
     if (modified) {
         write_eeprom_kb();
@@ -231,6 +237,35 @@ void sval_set_active_layer(uint32_t layer, bool save) {
     } else {
         rgblight_sethsv_noeeprom(cols.hue, cols.sat, cols.val);
     }
+}
+
+void change_dir_mode(uint8_t mode) {
+    if (mode == -1) {
+        if (global_saved_values.dir_mode == 2) {
+            global_saved_values.dir_mode = 0;
+        }
+        else {
+            global_saved_values.dir_mode += 1;
+        }
+    }
+    else {
+        global_saved_values.dir_mode = mode;
+    }
+    write_eeprom_kb();
+}
+void change_socd_mode(uint8_t mode) {
+    if (mode == -1) {
+        if (global_saved_values.socd_mode == 40) {
+            global_saved_values.socd_mode = 10;
+        }
+        else {
+            global_saved_values.socd_mode += 10;
+        }
+    }
+    else {
+        global_saved_values.socd_mode = mode;
+    }
+    write_eeprom_kb();
 }
 
 #ifndef SVALBOARD_REENABLE_BOOTMAGIC_LITE
