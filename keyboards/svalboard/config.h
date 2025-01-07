@@ -70,7 +70,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MOUSE_EXTENDED_REPORT
 #define SPLIT_POINTING_ENABLE
 #define POINTING_DEVICE_COMBINED
-//#define POINTING_DEVICE_AUTO_MOUSE_MH_ENABLE
+#define POINTING_DEVICE_AUTO_MOUSE_MH_ENABLE
 
 // Avoid slave-slave deadlock due to missing USB_VBUS_PIN.
 //

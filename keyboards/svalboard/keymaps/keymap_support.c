@@ -768,6 +768,7 @@ void matrix_scan_kb(void) {
 }
 
 void mouse_mode(bool on) {
+    /*
     if (on) {
         layer_on(MH_AUTO_BUTTONS_LAYER);
         mh_auto_buttons_timer = timer_read();
@@ -778,6 +779,7 @@ void mouse_mode(bool on) {
         mouse_mode_enabled = false;
         mouse_keys_pressed = 0;
     }
+    */
 }
 
 // Joystick Config
