@@ -77,7 +77,7 @@ enum my_keycodes {
     GC_UPLI,
     GC_LAST,
     GC_SUPN,
-    GC_NEUT
+    GC_NEUT,
     // New keycodes should go here, to avoid breaking existing keymaps - order must match vial.json
     KC_NORMAL_HOLD = SAFE_RANGE,
     KC_FUNC_HOLD,
