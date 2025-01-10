@@ -226,7 +226,16 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
 	                    keycode == SV_LEFT_SCROLL_TOGGLE || \
 		            keycode == SV_RIGHT_SCROLL_TOGGLE || \
 		            keycode == SV_TOGGLE_ACHORDION || \
-	                    keycode == SV_MH_CHANGE_TIMEOUTS)
+	                    keycode == SV_MH_CHANGE_TIMEOUTS || \
+                    keycode == GC_TOG || \
+                    keycode == GC_TDP || \
+                    keycode == GC_TLS || \
+                    keycode == GC_TRS || \
+                    keycode == GC_SCD || \
+                    keycode == GC_UPLI || \
+                    keycode == GC_LAST || \
+                    keycode == GC_SUPN || \
+                    keycode == GC_NEUT)
 
         uint16_t layer_keycode = keymap_key_to_keycode(MH_AUTO_BUTTONS_LAYER, record->event.key);
         if (BAD_KEYCODE_CONDITONAL ||
