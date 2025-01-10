@@ -25,7 +25,7 @@ void clear_button_axis(void) {
 }
 
 bool handle_socd(bool pressed, bool *state, int direction) {
-    *state[direction] = pressed;
+    state[direction] = pressed;
     bool *TEMP_STATE[4] = *state;
     int opposite = 3 - direction;
     if (TEMP_STATE[direction] && TEMP_STATE[opposite]) {
