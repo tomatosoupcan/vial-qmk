@@ -6,7 +6,7 @@
 extern "C" {
 #endif
 
-void process_gamepad(uint16_t keycode, bool pressed);
+bool process_gamepad(uint16_t keycode, bool pressed);
 
 #ifdef __cplusplus
 }
