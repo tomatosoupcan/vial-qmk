@@ -6,9 +6,9 @@
 #include <stdint.h>
 
 //left, down, up, right
-bool DP_STATE[4] = { false, false, false, false };
-bool RS_STATE[4] = { false, false, false, false };
-bool LS_STATE[4] = { false, false, false, false };
+bool DP_STATE[] = {false, false, false, false};
+bool RS_STATE[] = {false, false, false, false};
+bool LS_STATE[] = {false, false, false, false};
 
 void clear_button_axis(void) {
     joystick_set_axis(0, 0);
@@ -19,14 +19,17 @@ void clear_button_axis(void) {
     unregister_joystick_button(16);
     unregister_joystick_button(17);
     unregister_joystick_button(18);
-    DP_STATE[4] = { false, false, false, false };
-    RS_STATE[4] = { false, false, false, false };
-    LS_STATE[4] = { false, false, false, false };
+    for (int i = 0; i < 4; i++) {
+        DP_STATE[i] = false;
+        RS_STATE[i] = false;
+        LS_STATE[i] = false;
+    }
 }
 
-bool handle_socd(bool pressed, bool *state, int direction) {
+bool* handle_socd(bool pressed, bool *state, int direction) {
     state[direction] = pressed;
-    bool *TEMP_STATE[4] = *state;
+    bool *TEMP_STATE = malloc(4 * sizeof(bool));
+    memcpy(TEMP_STATE, state, 4 * sizeof(bool));
     int opposite = 3 - direction;
     if (TEMP_STATE[direction] && TEMP_STATE[opposite]) {
         switch (global_saved_values.socd_mode) {
@@ -60,9 +63,10 @@ bool handle_socd(bool pressed, bool *state, int direction) {
                 return TEMP_STATE;
         }
     }
+    return TEMP_STATE;
 }
 
-void handle_stick(int stick, bool state) {
+void handle_stick(int stick, bool *state) {
     //left stick axis is 0 for lr and 1 for ud, right stick is 3 and 4
     //stick 0 is for left stick, and stick 1 is for right stick
     int left_right = 0 + stick * 3;
@@ -84,10 +88,9 @@ void handle_stick(int stick, bool state) {
 
     joystick_set_axis(left_right, lr_state);
     joystick_set_axis(up_down, ud_state);
-    return
 }
 
-void handle_dpad(bool state) {
+void handle_dpad(bool *state) {
     int lr_state = 0;
     int ud_state = 0;
     if (state[0]) {
@@ -106,7 +109,7 @@ void handle_dpad(bool state) {
     if (lr_state == -1) {
         register_joystick_button(15);
         unregister_joystick_button(17);
-    } elif (lr_state == 1) {
+    } else if (lr_state == 1) {
         unregister_joystick_button(15);
         register_joystick_button(17);
     } else {
@@ -117,14 +120,13 @@ void handle_dpad(bool state) {
     if (ud_state == -1) {
         register_joystick_button(16);
         unregister_joystick_button(18);
-    } elif (ud_state == 1) {
+    } else if (ud_state == 1) {
         unregister_joystick_button(16);
         register_joystick_button(18);
     } else {
         unregister_joystick_button(16);
         unregister_joystick_button(18);
     }
-    return
 }
 
 void handle_button(bool pressed, int button) {
@@ -135,7 +137,7 @@ void handle_button(bool pressed, int button) {
     }
 }
 
-void handle_universal(int direction) {
+void handle_universal(bool pressed, int direction) {
     switch (global_saved_values.dir_mode) {
         case 0:
             handle_dpad(handle_socd(pressed, DP_STATE, direction));
@@ -144,7 +146,6 @@ void handle_universal(int direction) {
         case 2:
             handle_stick(1, handle_socd(pressed, RS_STATE, direction));
     }
-    return
 }
 
 bool process_gamepad(uint16_t keycode, bool pressed) {
@@ -189,13 +190,13 @@ bool process_gamepad(uint16_t keycode, bool pressed) {
             handle_button(pressed, 12);
             return false;
         case GC_UNL:
-            handle_universal(0);
+            handle_universal(pressed, 0);
         case GC_UND:
-            handle_universal(1);
+            handle_universal(pressed, 1);
         case GC_UNU:
-            handle_universal(2);
+            handle_universal(pressed, 2);
         case GC_UNR:
-            handle_universal(3);
+            handle_universal(pressed, 3);
         case GC_DNL:
             handle_dpad(handle_socd(pressed, DP_STATE, 0));
             return false;
@@ -235,47 +236,57 @@ bool process_gamepad(uint16_t keycode, bool pressed) {
         case GC_TOG:
             if (pressed) {
                 change_dir_mode(-1);
+                clear_button_axis();
             }
             return false;
         case GC_TDP:
             if (pressed) {
                 change_dir_mode(0);
+                clear_button_axis();
             }
             return false;
         case GC_TLS:
             if (pressed) {
                 change_dir_mode(1);
+                clear_button_axis();
             }
             return false;
         case GC_TRS:
             if (pressed) {
                 change_dir_mode(2);
+                clear_button_axis();
             }
             return false;
         case GC_SCD:
             if (pressed) {
                 change_socd_mode(-1);
+                clear_button_axis();
             }
             return false;
         case GC_UPLI:
             if (pressed) {
                 change_socd_mode(0);
+                clear_button_axis();
             }
             return false;
         case GC_LAST:
             if (pressed) {
                 change_socd_mode(1);
+                clear_button_axis();
             }
             return false;
         case GC_SUPN:
             if (pressed) {
                 change_socd_mode(2);
+                clear_button_axis();
             }
             return false;
         case GC_NEUT:
             if (pressed) {
                 change_socd_mode(3);
+                clear_button_axis();
             }
             return false;
     }
+    return true;
 };
