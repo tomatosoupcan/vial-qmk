@@ -9,3 +9,4 @@ JOYSTICK_ENABLE = yes
 JOYSTICK_DRIVER = digital
 
 SRC += ../features/achordion.c
+SRC += ../features/fightstick.c
