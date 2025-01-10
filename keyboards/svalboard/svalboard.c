@@ -52,7 +52,7 @@ void read_eeprom_kb(void) {
     if (global_saved_values.version < 4) {
         global_saved_values.version = 4;
         global_saved_values.dir_mode = 0;
-        global_saved_values.socd_mode = 10;
+        global_saved_values.socd_mode = 0;
         modified = true;
     }
     // As we add versions, just append here.
@@ -255,11 +255,11 @@ void change_dir_mode(uint8_t mode) {
 }
 void change_socd_mode(uint8_t mode) {
     if (mode == -1) {
-        if (global_saved_values.socd_mode == 40) {
-            global_saved_values.socd_mode = 10;
+        if (global_saved_values.socd_mode == 3) {
+            global_saved_values.socd_mode = 0;
         }
         else {
-            global_saved_values.socd_mode += 10;
+            global_saved_values.socd_mode += 1;
         }
     }
     else {

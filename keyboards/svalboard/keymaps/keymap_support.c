@@ -208,6 +208,9 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
     uprintf("KL: kc: 0x%04X, col: %2u, row: %2u, pressed: %u, time: %5u, int: %u, count: %u\n", keycode, record->event.key.col, record->event.key.row, record->event.pressed, record->event.time, record->tap.interrupted, record->tap.count);
 #endif
 
+    // Handle gamepad keycodes
+    if (!process_gamepad(keycode, record->event.pressed)) {return false;}
+
     if (mouse_mode_enabled && layer_state & (1 << MH_AUTO_BUTTONS_LAYER)) {
         // The keycodes below are all that are forced to drop you out of mouse mode.
         // The intent is for this list to eventually become just KC_NO, and KC_TRNS
