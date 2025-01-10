@@ -143,7 +143,7 @@ void handle_universal(int direction) {
     return
 }
 
-void process_gamepad(uint16_t keycode, bool pressed) {
+bool process_gamepad(uint16_t keycode, bool pressed) {
     switch (keycode) {
         case GC_SQU:
             handle_button(pressed, 0);
