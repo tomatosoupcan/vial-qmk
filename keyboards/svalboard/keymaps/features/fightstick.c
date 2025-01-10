@@ -24,7 +24,7 @@ void clear_button_axis(void) {
     LS_STATE[4] = { false, false, false, false };
 }
 
-bool handle_socd(bool pressed, bool* state, int direction) {
+bool handle_socd(bool pressed, bool *state, int direction) {
     *state[direction] = pressed;
     bool *TEMP_STATE[4] = *state;
     int opposite = 3 - direction;
@@ -138,11 +138,11 @@ void handle_button(bool pressed, int button) {
 void handle_universal(int direction) {
     switch (global_saved_values.dir_mode) {
         case 0:
-            handle_dpad(handle_socd(pressed, &DP_STATE, direction));
+            handle_dpad(handle_socd(pressed, DP_STATE, direction));
         case 1:
-            handle_stick(0, handle_socd(pressed, &LS_STATE, direction));
+            handle_stick(0, handle_socd(pressed, LS_STATE, direction));
         case 2:
-            handle_stick(1, handle_socd(pressed, &RS_STATE, direction));
+            handle_stick(1, handle_socd(pressed, RS_STATE, direction));
     }
     return
 }
@@ -197,40 +197,40 @@ bool process_gamepad(uint16_t keycode, bool pressed) {
         case GC_UNR:
             handle_universal(3);
         case GC_DNL:
-            handle_dpad(handle_socd(pressed, &DP_STATE, 0));
+            handle_dpad(handle_socd(pressed, DP_STATE, 0));
             return false;
         case GC_DND:
-            handle_dpad(handle_socd(pressed, &DP_STATE, 1));
+            handle_dpad(handle_socd(pressed, DP_STATE, 1));
             return false;
         case GC_DNU:
-            handle_dpad(handle_socd(pressed, &DP_STATE, 2));
+            handle_dpad(handle_socd(pressed, DP_STATE, 2));
             return false;
         case GC_DNR:
-            handle_dpad(handle_socd(pressed, &DP_STATE, 3));
+            handle_dpad(handle_socd(pressed, DP_STATE, 3));
             return false;
         case GC_LNL:
-            handle_stick(0, handle_socd(pressed, &LS_STATE, 0));
+            handle_stick(0, handle_socd(pressed, LS_STATE, 0));
             return false;
         case GC_LND:
-            handle_stick(0, handle_socd(pressed, &LS_STATE, 1));
+            handle_stick(0, handle_socd(pressed, LS_STATE, 1));
             return false;
         case GC_LNU:
-            handle_stick(0, handle_socd(pressed, &LS_STATE, 2));
+            handle_stick(0, handle_socd(pressed, LS_STATE, 2));
             return false;
         case GC_LNR:
-            handle_stick(0, handle_socd(pressed, &LS_STATE, 3));
+            handle_stick(0, handle_socd(pressed, LS_STATE, 3));
             return false;
         case GC_RNL:
-            handle_stick(1, handle_socd(pressed, &RS_STATE, 0));
+            handle_stick(1, handle_socd(pressed, RS_STATE, 0));
             return false;
         case GC_RND:
-            handle_stick(1, handle_socd(pressed, &RS_STATE, 1));
+            handle_stick(1, handle_socd(pressed, RS_STATE, 1));
             return false;
         case GC_RNU:
-            handle_stick(1, handle_socd(pressed, &RS_STATE, 2));
+            handle_stick(1, handle_socd(pressed, RS_STATE, 2));
             return false;
         case GC_RNR:
-            handle_stick(1, handle_socd(pressed, &RS_STATE, 3));
+            handle_stick(1, handle_socd(pressed, RS_STATE, 3));
             return false;
         case GC_TOG:
             if (pressed) {
