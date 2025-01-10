@@ -1,7 +1,7 @@
 #include "fightstick.h"
 #include "svalboard.h"
 #include QMK_KEYBOARD_H
-#include "keymap_support.h"
+#include "../keymap_support.h"
 #include <stdbool.h>
 #include <stdint.h>
 
