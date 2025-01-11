@@ -53,6 +53,7 @@ void read_eeprom_kb(void) {
         global_saved_values.version = 4;
         global_saved_values.dir_mode = 0;
         global_saved_values.socd_mode = 0;
+        global_saved_values.auto_mouse = true; //temporary to avoid issues down the line
         modified = true;
     }
     // As we add versions, just append here.
