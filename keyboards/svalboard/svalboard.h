@@ -73,5 +73,5 @@ void write_eeprom_kb(void);
 void recalibrate_pointer(void);
 void sval_set_active_layer(uint32_t layer, bool save);
 void sval_on_reconnect(void);
-void change_dir_mode(uint8_t mode);
-void change_socd_mode(uint8_t mode);
+void change_dir_mode(int8_t mode);
+void change_socd_mode(int8_t mode);
