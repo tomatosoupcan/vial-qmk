@@ -145,14 +145,15 @@ bool handle_universal(bool pressed, int direction) {
     switch (global_saved_values.dir_mode) {
         case 0:
             handle_dpad(handle_socd(pressed, DP_STATE, direction));
-            return false;
+            return true;
         case 1:
             handle_stick(0, handle_socd(pressed, LS_STATE, direction));
-            return false;
+            return true;
         case 2:
             handle_stick(1, handle_socd(pressed, RS_STATE, direction));
-            return false;
+            return true;
     }
+    return false;
 }
 
 bool process_gamepad(uint16_t keycode, bool pressed) {
