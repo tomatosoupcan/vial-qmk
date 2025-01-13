@@ -38,6 +38,7 @@ enum layer {
     FUNC,
     NAS,
     BOARD_CONFIG,
+    GAMEPAD,
     MBO = MH_AUTO_BUTTONS_LAYER,
 };
 
@@ -74,12 +75,12 @@ const uint16_t PROGMEM keymaps[DYNAMIC_KEYMAP_LAYER_COUNT][MATRIX_ROWS][MATRIX_C
 
         /*L1*/ KC_HOME,         KC_UP,          KC_RIGHT,       KC_DOWN,        KC_LEFT, XXXXXXX,
         /*L2*/ XXXXXXX,         KC_F6,          XXXXXXX,        KC_F5,          XXXXXXX, XXXXXXX,
-        /*L3*/ XXXXXXX,         KC_F4,          XXXXXXX,        KC_F3,          KC_ESC, XXXXXXX,
+        /*L3*/ TG(GAMEPAD),     KC_F4,          XXXXXXX,        KC_F3,          KC_ESC, XXXXXXX,
         /*L4*/ TO(BOARD_CONFIG), KC_F2,         XXXXXXX,        KC_F1,          KC_DEL, XXXXXXX,
 
         /*     Down            Pad            Up             Nail           Knuckle    DoubleDown*/
         /*RT*/ MO(NAS),         KC_SPACE,       _______,       KC_BSPC,      KC_LALT, _______,
-        /*LT*/ KC_LSFT,       KC_ENTER,         _______, KC_TAB,         KC_LCTL, _______
+        /*LT*/ KC_LSFT,         KC_ENTER,       _______,       KC_TAB,       KC_LCTL, _______
         ),
 
     [NAS] = LAYOUT(
@@ -96,7 +97,7 @@ const uint16_t PROGMEM keymaps[DYNAMIC_KEYMAP_LAYER_COUNT][MATRIX_ROWS][MATRIX_C
 
         /*     Down            Pad            Up             Nail           Knuckle    DoubleDown*/
         /*RT*/ MO(NAS),         KC_SPACE,       _______,       KC_BSPC,        KC_LALT, _______,
-        /*LT*/ KC_LSFT,         KC_ENTER,       _______,        KC_TAB,         KC_LCTL, _______
+        /*LT*/ KC_LSFT,         KC_ENTER,       _______,       KC_TAB,         KC_LCTL, _______
         ),
 
     [BOARD_CONFIG] = LAYOUT(
@@ -114,6 +115,23 @@ const uint16_t PROGMEM keymaps[DYNAMIC_KEYMAP_LAYER_COUNT][MATRIX_ROWS][MATRIX_C
         /*                  Down                Pad                 Up                  Nail                Knuckle             Double Down         */
         /* RT */            KC_TRNS,            KC_TRNS,            KC_TRNS,            KC_TRNS,            KC_TRNS,            KC_TRNS,
         /* LT */            KC_TRNS,            KC_TRNS,            KC_TRNS,            KC_TRNS,            KC_TRNS,            KC_TRNS
+      ),
+
+    [GAMEPAD] = LAYOUT(
+        /*                  Center              North               East                South               West                (XXX)               */
+        /* R1 */            GC_SQU,             GC_TRI,             GC_CIR,             GC_CRO,             GC_SQU,             -1,
+        /* R2 */            GC_TRI,             KC_NO,              KC_NO,              GC_CIR,             KC_NO,              -1,
+        /* R3 */            GC_R1,              KC_NO,              KC_NO,              GC_R2,              KC_NO,              -1,
+        /* R4 */            GC_L1,              KC_NO,              KC_NO,              GC_L2,              KC_NO,              -1,
+
+        /* L1 */            GC_UNR,             GC_UNU,             GC_UNR,             GC_UND,             GC_UNL,             -1,
+        /* L2 */            GC_UND,             GC_UNU,             KC_NO,              GC_UNU,             KC_NO,              -1,
+        /* L3 */            GC_UNL,             KC_NO,              KC_NO,              KC_NO,              KC_NO,              -1,
+        /* L4 */            GC_SEL,             GC_STA,             GC_TOG,             GC_HOM,             GC_SCD,             -1,
+
+        /*                  Down                Pad                 Up                  Nail                Knuckle             Double Down         */
+        /* RT */            GC_UNU,             GC_R3,              KC_NO,              KC_NO,              KC_NO,              KC_NO,
+        /* LT */            GC_UNU,             GC_L3,              TG(GAMEPAD),        KC_NO,              KC_NO,              KC_TRNS
       ),
 
     [MBO] = LAYOUT(
