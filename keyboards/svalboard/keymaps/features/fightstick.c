@@ -86,6 +86,10 @@ void handle_stick(int stick, bool *state) {
         lr_state = 127;
     }
 
+    if (stick == 0) {
+            ud_state = ud_state * -1;
+    }
+
     joystick_set_axis(left_right, lr_state);
     joystick_set_axis(up_down, ud_state);
 }
@@ -141,10 +145,13 @@ void handle_universal(bool pressed, int direction) {
     switch (global_saved_values.dir_mode) {
         case 0:
             handle_dpad(handle_socd(pressed, DP_STATE, direction));
+            return false;
         case 1:
             handle_stick(0, handle_socd(pressed, LS_STATE, direction));
+            return false;
         case 2:
             handle_stick(1, handle_socd(pressed, RS_STATE, direction));
+            return false;
     }
 }
 
@@ -191,12 +198,16 @@ bool process_gamepad(uint16_t keycode, bool pressed) {
             return false;
         case GC_UNL:
             handle_universal(pressed, 0);
+            return false;
         case GC_UND:
             handle_universal(pressed, 1);
+            return false;
         case GC_UNU:
             handle_universal(pressed, 2);
+            return false;
         case GC_UNR:
             handle_universal(pressed, 3);
+            return false;
         case GC_DNL:
             handle_dpad(handle_socd(pressed, DP_STATE, 0));
             return false;

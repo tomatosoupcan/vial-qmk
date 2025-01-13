@@ -240,7 +240,7 @@ void sval_set_active_layer(uint32_t layer, bool save) {
     }
 }
 
-void change_dir_mode(uint8_t mode) {
+void change_dir_mode(int8_t mode) {
     if (mode == -1) {
         if (global_saved_values.dir_mode == 2) {
             global_saved_values.dir_mode = 0;
@@ -254,7 +254,7 @@ void change_dir_mode(uint8_t mode) {
     }
     write_eeprom_kb();
 }
-void change_socd_mode(uint8_t mode) {
+void change_socd_mode(int8_t mode) {
     if (mode == -1) {
         if (global_saved_values.socd_mode == 3) {
             global_saved_values.socd_mode = 0;
