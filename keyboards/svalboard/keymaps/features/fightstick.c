@@ -141,7 +141,7 @@ void handle_button(bool pressed, int button) {
     }
 }
 
-void handle_universal(bool pressed, int direction) {
+bool handle_universal(bool pressed, int direction) {
     switch (global_saved_values.dir_mode) {
         case 0:
             handle_dpad(handle_socd(pressed, DP_STATE, direction));
