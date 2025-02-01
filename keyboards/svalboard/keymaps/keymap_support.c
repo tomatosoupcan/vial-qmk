@@ -319,11 +319,12 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
                 output_keyboard_info();
                 return false;
             case SV_TOGGLE_AUTOMOUSE:
-                global_saved_values.auto_mouse = !global_saved_values.auto_mouse;
                 //if we disable automouse, manually kick out of mouse mode in case timer was running
-                if (!global_saved_values.auto_mouse) {
+                //needs to go first to avoid the lockout
+                if (global_saved_values.auto_mouse) {
                     mouse_mode(false);
                 }
+                global_saved_values.auto_mouse = !global_saved_values.auto_mouse;
                 write_eeprom_kb();
                 return false;
         }
