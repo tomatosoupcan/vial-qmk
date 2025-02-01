@@ -222,7 +222,8 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
 	                    keycode == SV_LEFT_SCROLL_TOGGLE || \
 		            keycode == SV_RIGHT_SCROLL_TOGGLE || \
 		            keycode == SV_TOGGLE_ACHORDION || \
-	                    keycode == SV_MH_CHANGE_TIMEOUTS)
+	                    keycode == SV_MH_CHANGE_TIMEOUTS || \
+                        keycode == SV_TOGGLE_AUTOMOUSE)
 
         uint16_t layer_keycode = keymap_key_to_keycode(MH_AUTO_BUTTONS_LAYER, record->event.key);
         if (BAD_KEYCODE_CONDITONAL ||
@@ -319,6 +320,10 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
                 return false;
             case SV_TOGGLE_AUTOMOUSE:
                 global_saved_values.auto_mouse = !global_saved_values.auto_mouse;
+                //if we disable automouse, manually kick out of mouse mode in case timer was running
+                if (!global_saved_values.auto_mouse) {
+                    mouse_mode(false);
+                }
                 write_eeprom_kb();
                 return false;
         }
